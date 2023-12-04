@@ -50,6 +50,7 @@
         <h2>Registration Successful</h2>
 
         <p>Congratulations! Your registration was successful.</p>
+        <p><a href="/login">click here to go back to login page</a></p>
 
     </div>
     </body>
