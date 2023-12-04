@@ -1,10 +1,13 @@
 package com.employee.registrationform.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "department")
@@ -15,16 +18,19 @@ public class Department {
 	private Long id;
 	private String code;
 	private String departmentName;
+	@OneToMany(mappedBy = "department")
+    private List<Employee> employees;
 
 	public Department() {
 
 	}
 
-	public Department(Long id, String code, String departmentName) {
+	public Department(Long id, String code, String departmentName, List<Employee> employees) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.departmentName = departmentName;
+		this.employees = employees;
 	}
 
 	public Long getId() {
@@ -51,9 +57,20 @@ public class Department {
 		this.departmentName = departmentName;
 	}
 
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", code=" + code + ", departmentName=" + departmentName + "]";
+		return "Department [id=" + id + ", code=" + code + ", departmentName=" + departmentName + ", employees="
+				+ employees + "]";
 	}
+
+	
 
 }
