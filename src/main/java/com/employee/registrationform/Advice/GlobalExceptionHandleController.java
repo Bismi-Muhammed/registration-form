@@ -40,7 +40,7 @@ public class GlobalExceptionHandleController extends ResponseEntityExceptionHand
 	 * 
 	 */
 
-	@Override
+	
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		return new ResponseEntity<Object>("please change your http method type", HttpStatus.NOT_FOUND);
