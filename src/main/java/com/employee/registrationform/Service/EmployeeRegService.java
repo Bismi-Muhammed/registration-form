@@ -73,7 +73,7 @@ public class EmployeeRegService {
 
 	}
 
-	public List<Employee> employeesByDepartment(int id) {
+	public List<Employee> employeesByDepartment(Long id) {
 		List<Employee> employeeList = employeeRepo.findEmpByDepartment(id);
 		return employeeList;
 	}
@@ -86,6 +86,22 @@ public class EmployeeRegService {
 	public Employee updateEmployee(Employee currentEmployee) {
 		Employee updatedEmployee = employeeRepo.save(currentEmployee);
 		return updatedEmployee;
+	}
+
+	public Department getDepartmentById(Long department) {
+		Optional<Department> selectedDepartment=departmentRepo.findById(department);
+		return selectedDepartment.get();
+		}
+
+	public List<Employee> getEmployeesByDepartmentName(String departmentName) {
+		Department departmentDetails=departmentRepo.getDepartmentByDepartmentName(departmentName);
+		Long departmentid=departmentDetails.getId();
+//		System.out.println(departmentDetails.getId());
+		List<Employee> employeeList=employeeRepo.findEmpByDepartment(departmentid);
+		if (employeeList.isEmpty()) {
+			throw new ServiceLayerException("List is completely empty,No employee data exist in database");
+		}
+		return employeeList;
 	}
 
 }
