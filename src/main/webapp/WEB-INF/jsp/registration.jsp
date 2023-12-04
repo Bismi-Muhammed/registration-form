@@ -8,7 +8,7 @@
     <%-- Initialize datepicker --%>
     <script>
         $(function() {
-            $("#datepicker").datepicker();
+            $("#datepicker").datepicker({format: 'dd/mm/yyyy'});
         });
         
 
@@ -87,15 +87,15 @@
 <body>
      <div class="container" align="center">
         <h2>Employee Registration</h2>
-        <form action="/saveEmployee" method="post">
-            <label for="employeeName">Employee No:</label>
+        <form id="employeeForm" action="/saveEmployee" method="post">
+            <label for="employeeNo">Employee No:</label>
             <input type="text" id="employeeNo" name="employeeNo" required><br><br>
 
-            <label for="lastName">Employee Name:</label>
+            <label for="employeeName">Employee Name:</label>
             <input type="text" id="empName" name="empName" required><br><br>
 
-            <label for="email">Date of Joining:</label>
-            <input type="text" id="datepicker" name="joiningDate" readonly>
+            <label for="joiningDate">Date of Joining:</label>
+            <input type="text" id="datepicker" name="joiningDate" readonly >
             <br><br>
             
             <label for="department">Department:</label>
@@ -121,3 +121,30 @@
     </div>   
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#employeeForm").submit(function(event) {
+            // Prevent the form from submitting in the traditional way
+            event.preventDefault();
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+console.log(formData);
+            // Make an AJAX POST request to your backend endpoint
+            $.ajax({
+                type: "POST",
+                url: "/saveEmployee",
+                data: formData,
+                success: function(response) {
+                    // Handle the success response
+                    console.log("Success:", response);
+                    window.location.href = '/success';
+                },
+                error: function(error) {
+                    // Handle the error response
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });
+</script>
