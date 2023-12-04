@@ -8,5 +8,5 @@ import com.employee.registrationform.Entity.Department;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
-
+	Department getDepartmentByDepartmentName(String departmentName);
 }
